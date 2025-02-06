@@ -35,6 +35,6 @@ function showModal(modalId) {
 function closeModal(modalId) {
     document.getElementById(modalId).classList.add('hidden');
     if (modalId === 'successModal') {
-        window.location.href = "dashboard.html";
+        window.location.href = "/public/dashboard.html";
     }
 }

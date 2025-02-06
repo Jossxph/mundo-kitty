@@ -5,8 +5,54 @@ const messages = [
     "Tu sonrisa ilumina mi mundo 😊",
     "Cada momento contigo es mágico ✨",
     "Eres mi inspiración diaria 💫",
-    "Tu amor me hace mejor persona 💝"
+    "Tu amor me hace mejor persona 💝",
+    "Cada mensaje tuyo alegra mi día 📲",
+    "Contigo, cualquier lugar se siente como hogar 🏠",
+    "Tu risa es la melodía que alegra mis mañanas 🎶",
+    "Eres la chispa que enciende mi corazón 🔥",
+    "Cada minuto sin ti me recuerda lo afortunado que soy 💌",
+    "Eres mi refugio en medio del caos 🌿",
+    "Con cada palabra tuya, el mundo se detiene 🕊️",
+    "Tu voz es el sonido más hermoso que conozco 🎧",
+    "A tu lado, el tiempo vuela sin prisa ⏳",
+    "Tu mirada me derrite, incluso a la distancia 👀",
+    "Eres la razón de mis sonrisas inesperadas 😄",
+    "Cada día pienso en ti y se me alegra el alma 🌸",
+    "Tu amor me llena y me impulsa a ser mejor 🌟",
+    "Aunque estemos lejos, siempre te siento cerca en mi corazón 💓",
+    "Cada llamada contigo es un regalo que atesoro 🎁",
+    "Eres la magia que transforma mis días grises en color 🌈",
+    "Contigo, la distancia se vuelve insignificante 🛤️",
+    "Tus palabras son el puente que une nuestras almas 🌉",
+    "Eres mi cómplice en esta aventura llamada amor 💑",
+    "Cada recuerdo contigo es un tesoro que guardo con cariño 🎀",
+    "Tu amor es mi motor para seguir adelante 🚀",
+    "A tu lado, la vida se vuelve una dulce melodía 🎵",
+    "Eres mi pensamiento favorito en cada momento del día 💭",
+    "Tu ternura me envuelve como un cálido abrazo 🤗",
+    "Eres mi sueño hecho realidad, sin importar la distancia 💭",
+    "Cada mensaje tuyo es un pedacito de felicidad en mi día 📬",
+    "A veces, cierro los ojos y siento que ya estás aquí a mi lado 👥",
+    "Tu amor es el mejor viaje, y no necesito boleto para volar 🚀",
+    "Contigo, cada día es una nueva aventura emocionante 🎢",
+    "Eres el motivo de mis pensamientos más dulces 💭",
+    "Tu forma de ser me enamora una y otra vez 💕",
+    "Cada minuto lejos de ti solo fortalece mi amor ❤️",
+    "Eres mi secreto mejor guardado y mi verdad más hermosa 🤫",
+    "Tu risa me contagia y alegra mi espíritu ☺️",
+    "Cada vez que hablo contigo, mi corazón se acelera 💓",
+    "Eres la razón por la que sonrío sin motivo aparente 😌",
+    "Contigo, la distancia se convierte en un simple detalle 📏",
+    "Tu presencia en mis mensajes hace que el día sea perfecto 🌞",
+    "Eres mi refugio en un mundo a veces caótico 🌌",
+    "Cada palabra tuya es un abrazo que recorre kilómetros 🤍",
+    "Eres la melodía que da ritmo a mis días 💖",
+    "Tu amor ilumina cada rincón de mi corazón 🔆",
+    "Contigo, cada segundo cuenta y cada risa se vuelve eternidad ⏰",
+    "Eres mi inspiración en cada paso que doy 🏃‍♂️",
+    "Cada día contigo, aunque sea a la distancia, es un regalo de amor 🎁"
 ];
+
 
 function createFloatingHeart(x, y) {
     const heart = document.createElement('div');
@@ -239,7 +285,7 @@ addNotification('notificacion', {
     descripcion: "Es hora de hacerlo único.",
     text_button: "Ir ahora",
     texto_cold: "Hace un momento",
-    dirrecion: "../modules/san-valentin.html"
+    dirrecion: "/src/modules/san-valentin.html"
 });
 
 
