@@ -1,0 +1,599 @@
+<!-- <!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Un Viaje por Nuestro Amor ❤️</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap"
+    rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <style>
+    :root {
+      --primary: #ff69b4;
+      --secondary: #9f2b68;
+      --accent: #ff1493;
+      --dark: #1a0f1f;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #13111C, #221C3E);
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+      scroll-snap-type: y mandatory;
+    }
+
+    section {
+      scroll-snap-align: start;
+    }
+
+    .romantic-title {
+      font-family: 'Dancing Script', cursive;
+    }
+
+    .elegant-text {
+      font-family: 'Playfair Display', serif;
+    }
+
+    .glass-effect {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .card-hover {
+      transition: all 0.3s ease;
+    }
+
+    .card-hover:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 10px 20px rgba(255, 105, 180, 0.2);
+    }
+
+    .virtual-card {
+      perspective: 1000px;
+      transform-style: preserve-3d;
+    }
+
+    .card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+    }
+
+    .virtual-card:hover .card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .card-front,
+    .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+    }
+
+    .card-back {
+      transform: rotateY(180deg);
+    }
+
+    .floating {
+      animation: floating 3s ease-in-out infinite;
+    }
+
+    @keyframes floating {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-15px);
+      }
+    }
+
+    .heart-beat {
+      animation: heartBeat 1.5s ease-in-out infinite;
+    }
+
+    @keyframes heartBeat {
+      0%,
+      100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+    }
+
+    /* Ajuste responsivo para nav-dots */
+    .nav-dots {
+      position: fixed;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 100;
+    }
+
+    .nav-dot {
+      width: 12px;
+      height: 12px;
+      margin: 10px 0;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .nav-dot.active {
+      background: var(--primary);
+      box-shadow: 0 0 10px var(--primary);
+    }
+
+    .sparkle {
+      position: absolute;
+      pointer-events: none;
+      animation: sparkle 1.5s linear infinite;
+    }
+
+    @keyframes sparkle {
+      0% {
+        transform: scale(0) rotate(0deg);
+        opacity: 0;
+      }
+      50% {
+        transform: scale(1) rotate(180deg);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(0) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Animación para la tarjeta virtual */
+    .love-letter {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0px) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-20px) rotate(2deg);
+      }
+      100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+    }
+
+    .hearts-decoration {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .floating-heart {
+      position: absolute;
+      animation: floatingHeart 3s ease-in-out infinite;
+      opacity: 0.6;
+    }
+
+    @keyframes floatingHeart {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.6;
+      }
+      50% {
+        transform: translateY(-20px) scale(1.1);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(0) scale(1);
+        opacity: 0.6;
+      }
+    }
+  </style>
+</head>
+
+<body class="text-white">
+
+  <div class="nav-dots sm:right-5 md:right-20">
+    <div class="nav-dot active" data-section="start"></div>
+    <div class="nav-dot" data-section="memories"></div>
+    <div class="nav-dot" data-section="promises"></div>
+    <div class="nav-dot" data-section="virtual-card"></div>
+    <div class="nav-dot" data-section="valentine"></div>
+  </div>
+
+
+  <section id="start" class="section h-screen flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 relative">
+    <div class="text-center max-w-4xl mx-auto z-10 space-y-6">
+      <h1 class="romantic-title text-5xl sm:text-6xl md:text-8xl text-pink-400 floating">
+        Mi Amada Antoanet
+      </h1>
+      <p class="elegant-text text-lg sm:text-xl md:text-2xl text-pink-200">
+        Te invito a un viaje mágico a través de nuestros momentos más especiales...
+      </p>
+      <button onclick="smoothScroll('memories')"
+        class="mt-4 px-6 py-3 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full text-white text-base sm:text-xl transition-all hover:shadow-lg hover:shadow-pink-500/50 transform hover:scale-105">
+        Comenzar Nuestro Viaje ✨
+      </button>
+    </div>
+  </section>
+
+
+  <section id="memories" class="section h-screen flex flex-col items-center justify-center p-4 sm:p-6 md:p-8">
+    <h2 class="romantic-title text-4xl sm:text-5xl md:text-7xl mb-6 text-pink-400">
+      Nuestros Momentos Especiales
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+
+    </div>
+    <button onclick="smoothScroll('promises')"
+      class="mt-8 px-6 py-3 glass-effect rounded-full text-white transition-all hover:bg-pink-500/20 transform hover:scale-105">
+      Descubre Más ➜
+    </button>
+  </section>
+
+  <section id="promises" class="section h-screen flex flex-col items-center justify-center p-4 sm:p-6 md:p-8">
+    <h2 class="romantic-title text-4xl sm:text-5xl md:text-7xl mb-6 text-pink-400">
+      Mis Promesas Para Ti
+    </h2>
+    <div id="promisesContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+
+    </div>
+    <button onclick="smoothScroll('virtual-card')"
+      class="mt-10 px-6 py-3 glass-effect rounded-full text-white transition-all hover:bg-pink-500/20 transform hover:scale-105">
+      Tu Carta Especial ➜
+    </button>
+  </section>
+
+
+  <section id="virtual-card" class="section h-screen flex flex-col items-center justify-center p-4 sm:p-6 md:p-8">
+    <div class="virtual-card w-full max-w-lg aspect-[3/4] mx-auto">
+      <div class="card-inner">
+        <div class="card-front glass-effect rounded-3xl p-6 sm:p-8 flex flex-col items-center justify-center space-y-4">
+          <div class="hearts-decoration">
+
+          </div>
+          <h3 class="romantic-title text-3xl sm:text-4xl text-pink-400">Para Mi Amor</h3>
+          <div class="love-letter glass-effect p-4 sm:p-6 rounded-xl">
+            <p class="elegant-text text-base sm:text-lg text-pink-200 leading-relaxed">
+              Mi querida Antoanet,<br /><br />
+              Cada día a tu lado es un regalo que atesoro en lo más profundo de mi corazón...
+            </p>
+          </div>
+          <span class="text-sm sm:text-base text-pink-300">(Toca para voltear) ↺</span>
+        </div>
+        <div class="card-back glass-effect rounded-3xl p-6 sm:p-8 flex flex-col items-center justify-center space-y-4">
+          <h3 class="romantic-title text-3xl sm:text-4xl text-pink-400">Te Amo</h3>
+          <p class="elegant-text text-base sm:text-lg text-pink-200 text-center leading-relaxed">
+            Eres mi inspiración, mi alegría y mi amor eterno...
+          </p>
+          <button onclick="smoothScroll('valentine')"
+            class="mt-4 px-6 py-3 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full text-white transition-all hover:shadow-lg hover:shadow-pink-500/50 transform hover:scale-105">
+            ¿Me Concedes un Momento? ➜
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="valentine" class="section h-screen flex flex-col items-center justify-center p-4 sm:p-6 md:p-8">
+    <div id="valentineQuestion" class="text-center space-y-4">
+      <h2 class="romantic-title text-4xl sm:text-6xl md:text-8xl text-pink-400 heart-beat">
+        Mi Dulce Antoanet
+      </h2>
+      <p class="elegant-text text-xl sm:text-3xl md:text-4xl text-pink-200">
+        ¿Me concederías el honor de ser mi San Valentin?
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 sm:gap-8 justify-center">
+        <button onclick="handleValentineResponse(true)"
+          class="px-6 py-3 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full text-white text-base sm:text-xl transition-all hover:shadow-lg hover:shadow-pink-500/50 transform hover:scale-105">
+          ¡Sí, mi amor! 💝
+        </button>
+        <button id="noButton"
+          class="px-6 py-3 glass-effect rounded-full text-white text-base sm:text-xl transition-all hover:scale-105">
+          No 💔
+        </button>
+      </div>
+    </div>
+    <div id="acceptanceMessage" class="hidden text-center space-y-4">
+      <h2 class="romantic-title text-4xl sm:text-6xl md:text-8xl text-pink-400">
+        ¡Te Amo! 💖
+      </h2>
+      <p class="elegant-text text-lg sm:text-2xl text-pink-200">
+        Gracias por hacer cada día más especial...
+      </p>
+      <button onclick="resetJourney()"
+        class="px-6 py-3 glass-effect rounded-full text-white transition-all hover:bg-pink-500/20 transform hover:scale-105">
+        Volver a Empezar ↺
+      </button>
+    </div>
+  </section>
+
+  <script>
+    // Inicialización de GSAP ScrollTrigger
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Datos
+    const memories = [{
+        title: "Nuestro Primer Encuentro",
+        description: "El día que el destino nos unió..."
+      },
+      {
+        title: "Primera Cita",
+        description: "Aquella noche mágica que nunca olvidaré..."
+      },
+      {
+        title: "Nuestro Primer Viaje",
+        description: "Una aventura inolvidable juntos..."
+      }
+    ];
+
+    const promises = [
+      "Prometo amarte más cada día",
+      "Prometo ser tu apoyo incondicional",
+      "Prometo hacerte sonreír en los momentos difíciles",
+      "Prometo ser tu compañero de aventuras",
+      "Prometo valorar cada momento juntos",
+      "Prometo cuidar de nuestro amor"
+    ];
+
+    // Función de scroll suave
+    function smoothScroll(targetId) {
+      const target = document.getElementById(targetId);
+      target.scrollIntoView({
+        behavior: 'smooth'
+      });
+    }
+
+    // Crear recuerdos
+    function createMemories() {
+      const container = document.querySelector('#memories .grid');
+      memories.forEach((memory, index) => {
+        const card = document.createElement('div');
+        card.className = 'glass-effect card-hover rounded-xl p-4 sm:p-6 text-center';
+        card.innerHTML = `
+                    <div class="h-32 sm:h-40 mb-3 overflow-hidden rounded-lg bg-gradient-to-br from-pink-500/20 to-purple-600/20 flex items-center justify-center">
+                        <span class="text-4xl sm:text-5xl">💖</span>
+                    </div>
+                    <h3 class="elegant-text text-lg sm:text-xl font-bold mb-1 text-pink-300">${memory.title}</h3>
+                    <p class="text-gray-300 text-sm sm:text-base">${memory.description}</p>
+                `;
+        container.appendChild(card);
+
+        // Animación con GSAP
+        gsap.from(card, {
+          scrollTrigger: {
+            trigger: card,
+            start: "top bottom",
+            end: "top center",
+            scrub: 1
+          },
+          y: 100,
+          opacity: 0
+        });
+      });
+    }
+
+    // Crear promesas
+    function createPromises() {
+      const container = document.getElementById('promisesContainer');
+      promises.forEach((promise, index) => {
+        const card = document.createElement('div');
+        card.className = 'promise-card glass-effect rounded-xl p-4 sm:p-6 text-center transform transition-all hover:scale-105';
+        card.innerHTML = `
+                            <div class="mb-3">
+                                <span class="text-3xl">✨</span>
+                            </div>
+                            <p class="elegant-text text-base sm:text-lg text-pink-200">${promise}</p>
+                        `;
+        container.appendChild(card);
+
+        // Animación con GSAP
+        gsap.from(card, {
+          scrollTrigger: {
+            trigger: card,
+            start: "top bottom",
+            end: "top center",
+            scrub: 1
+          },
+          x: index % 2 === 0 ? -100 : 100,
+          opacity: 0
+        });
+      });
+    }
+
+    // Crear corazones flotantes para la tarjeta virtual
+    function createFloatingHearts() {
+      const container = document.querySelector('.hearts-decoration');
+      for (let i = 0; i < 12; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'floating-heart';
+        heart.innerHTML = '💗';
+        heart.style.left = `${Math.random() * 100}%`;
+        heart.style.top = `${Math.random() * 100}%`;
+        heart.style.animationDelay = `${Math.random() * 3}s`;
+        heart.style.fontSize = `${Math.random() * 20 + 10}px`;
+        container.appendChild(heart);
+      }
+    }
+
+    // Manejador de respuesta de San Valentín
+    function handleValentineResponse(accepted) {
+      if (accepted) {
+        document.getElementById('valentineQuestion').style.display = 'none';
+        document.getElementById('acceptanceMessage').classList.remove('hidden');
+
+        // Celebración con confeti
+        const duration = 15 * 1000;
+        const animationEnd = Date.now() + duration;
+        const defaults = {
+          startVelocity: 30,
+          spread: 360,
+          ticks: 60,
+          zIndex: 0
+        };
+
+        function randomInRange(min, max) {
+          return Math.random() * (max - min) + min;
+        }
+
+        const interval = setInterval(function () {
+          const timeLeft = animationEnd - Date.now();
+
+          if (timeLeft <= 0) {
+            return clearInterval(interval);
+          }
+
+          const particleCount = 50 * (timeLeft / duration);
+          confetti(Object.assign({}, defaults, {
+            particleCount,
+            origin: {
+              x: randomInRange(0.1, 0.3),
+              y: Math.random() - 0.2
+            }
+          }));
+          confetti(Object.assign({}, defaults, {
+            particleCount,
+            origin: {
+              x: randomInRange(0.7, 0.9),
+              y: Math.random() - 0.2
+            }
+          }));
+        }, 250);
+      }
+    }
+
+    // Configurar comportamiento del botón "No"
+    function setupNoButton() {
+      const button = document.getElementById('noButton');
+      button.addEventListener('mouseover', () => {
+        const maxX = window.innerWidth - button.offsetWidth;
+        const maxY = window.innerHeight - button.offsetHeight;
+
+        let newX = Math.random() * maxX;
+        let newY = Math.random() * maxY;
+
+        // Asegurarse de que el botón se mantenga en el viewport
+        newX = Math.max(0, Math.min(newX, maxX));
+        newY = Math.max(0, Math.min(newY, maxY));
+
+        button.style.position = 'fixed';
+        button.style.left = `${newX}px`;
+        button.style.top = `${newY}px`;
+        button.style.transform = 'translate(0, 0)';
+      });
+    }
+
+    // Reiniciar el viaje
+    function resetJourney() {
+      smoothScroll('start');
+      document.getElementById('valentineQuestion').style.display = 'block';
+      document.getElementById('acceptanceMessage').classList.add('hidden');
+
+      // Reiniciar la posición del botón "No"
+      const noButton = document.getElementById('noButton');
+      noButton.style.position = 'static';
+      noButton.style.transform = 'none';
+    }
+
+    // Configurar navegación entre secciones
+    function setupNavigation() {
+      const sections = document.querySelectorAll('.section');
+      const navDots = document.querySelectorAll('.nav-dot');
+
+      // Actualizar el punto activo al hacer scroll
+      window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.clientHeight;
+          if (scrollY >= (sectionTop - sectionHeight / 3)) {
+            current = section.getAttribute('id');
+          }
+        });
+
+        navDots.forEach(dot => {
+          dot.classList.remove('active');
+          if (dot.dataset.section === current) {
+            dot.classList.add('active');
+          }
+        });
+      });
+
+      // Navegación al hacer click en los puntos
+      navDots.forEach(dot => {
+        dot.addEventListener('click', () => {
+          smoothScroll(dot.dataset.section);
+        });
+      });
+    }
+
+    // Agregar efecto de chispas (sparkle)
+    function addSparkleEffect() {
+      const sparkleContainer = document.createElement('div');
+      sparkleContainer.className = 'fixed inset-0 pointer-events-none z-0';
+      document.body.appendChild(sparkleContainer);
+
+      setInterval(() => {
+        const sparkle = document.createElement('div');
+        sparkle.className = 'sparkle absolute';
+        sparkle.style.left = `${Math.random() * 100}%`;
+        sparkle.style.top = `${Math.random() * 100}%`;
+        sparkle.innerHTML = '✨';
+        sparkleContainer.appendChild(sparkle);
+
+        setTimeout(() => sparkle.remove(), 1500);
+      }, 1000);
+    }
+
+    // Inicializar al cargar el DOM
+    document.addEventListener('DOMContentLoaded', () => {
+      createMemories();
+      createPromises();
+      createFloatingHearts();
+      setupNoButton();
+      setupNavigation();
+      addSparkleEffect();
+
+      // Animaciones iniciales con GSAP
+      gsap.from('#start > *', {
+        y: 30,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.2
+      });
+
+      // Navegación con teclado
+      document.addEventListener('keydown', (e) => {
+        const sections = ['start', 'memories', 'promises', 'virtual-card', 'valentine'];
+        const currentSection = document.querySelector('.nav-dot.active').dataset.section;
+        const currentIndex = sections.indexOf(currentSection);
+
+        if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+          if (currentIndex < sections.length - 1) {
+            smoothScroll(sections[currentIndex + 1]);
+          }
+        } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+          if (currentIndex > 0) {
+            smoothScroll(sections[currentIndex - 1]);
+          }
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>-->

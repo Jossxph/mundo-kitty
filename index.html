@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso Privado - MUNDO KITTY</title>
+    <meta name="description" content="Mundo Kitty para mi novia.">
+    <link rel="icon" href="public/cabehello2.png" type="image/png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configuración de Tailwind para modo oscuro -->
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+      }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+</head>
+<body class="bg-[url('public/fondo-dark.jpg')] bg-no-repeat bg-cover bg-center min-h-screen flex items-center justify-center p-4 dark:bg-gray-900">
+    <div class="w-full max-w-4xl bg-white dark:bg-gray-800 rounded-3xl shadow-2xl dark:shadow-gray-900 overflow-hidden grid grid-cols-1 md:grid-cols-2 animate__animated animate__fadeIn">
+        <!-- Sección de Imagen -->
+        <div class="hidden md:block bg-cover bg-center" style="background-image: url('public/holahello.png')">
+            <div class="h-full bg-pink-500 bg-opacity-50 flex items-center justify-center">
+                <h2 class="text-white text-5xl font-bold text-center px-8 transform hover:scale-110 transition duration-500 animate__animated animate__slideInLeft">MUNDO KITTY</h2>
+            </div>
+        </div>
+
+        <!-- Sección del Formulario de Acceso -->
+        <div class="p-8 flex flex-col justify-center animate__animated animate__slideInRight">
+            <h1 class="text-3xl font-semibold text-pink-700 dark:text-pink-300 mb-6 text-center">Acceso Restringido</h1>
+            
+            <div class="bg-pink-50 dark:bg-gray-700 rounded-xl p-4 mb-6 flex items-center shadow-inner transform transition duration-300 hover:scale-105">
+                <input 
+                    type="text" 
+                    id="passwordDisplay" 
+                    class="w-full text-center text-3xl font-light text-rose-800 dark:text-rose-300 bg-transparent border-none focus:outline-none tracking-[0.5em]"
+                    placeholder="• • • •" 
+                    readonly
+                    maxlength="4"
+                >
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-rose-400 dark:text-rose-200 animate__animated animate__pulse animate__infinite" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+            </div>
+            
+            <div class="max-w-xs mx-auto p-6 bg-pink-50 dark:bg-gray-700 rounded-xl shadow-lg">
+                <div class="grid grid-cols-3 gap-4">
+                    <button onclick="addNumber(1)" class="p-4 rounded-lg bg-white dark:bg-gray-600 hover:bg-pink-100 dark:hover:bg-gray-500 transition-all duration-300 text-pink-600 dark:text-pink-300 font-semibold shadow-sm border border-pink-200 dark:border-gray-500 hover:scale-105">1</button>
+                    <button onclick="addNumber(2)" class="p-4 rounded-lg bg-white dark:bg-gray-600 hover:bg-pink-100 dark:hover:bg-gray-500 transition-all duration-300 text-pink-600 dark:text-pink-300 font-semibold shadow-sm border border-pink-200 dark:border-gray-500 hover:scale-105">2</button>
+                    <button onclick="addNumber(3)" class="p-4 rounded-lg bg-white dark:bg-gray-600 hover:bg-pink-100 dark:hover:bg-gray-500 transition-all duration-300 text-pink-600 dark:text-pink-300 font-semibold shadow-sm border border-pink-200 dark:border-gray-500 hover:scale-105">3</button>
+                    <button onclick="addNumber(4)" class="p-4 rounded-lg bg-white dark:bg-gray-600 hover:bg-pink-100 dark:hover:bg-gray-500 transition-all duration-300 text-pink-600 dark:text-pink-300 font-semibold shadow-sm border border-pink-200 dark:border-gray-500 hover:scale-105">4</button>
+                    <button onclick="addNumber(5)" class="p-4 rounded-lg bg-white dark:bg-gray-600 hover:bg-pink-100 dark:hover:bg-gray-500 transition-all duration-300 text-pink-600 dark:text-pink-300 font-semibold shadow-sm border border-pink-200 dark:border-gray-500 hover:scale-105">5</button>
+                    <button onclick="addNumber(6)" class="p-4 rounded-lg bg-white dark:bg-gray-600 hover:bg-pink-100 dark:hover:bg-gray-500 transition-all duration-300 text-pink-600 dark:text-pink-300 font-semibold shadow-sm border border-pink-200 dark:border-gray-500 hover:scale-105">6</button>
+                    <button onclick="addNumber(7)" class="p-4 rounded-lg bg-white dark:bg-gray-600 hover:bg-pink-100 dark:hover:bg-gray-500 transition-all duration-300 text-pink-600 dark:text-pink-300 font-semibold shadow-sm border border-pink-200 dark:border-gray-500 hover:scale-105">7</button>
+                    <button onclick="addNumber(8)" class="p-4 rounded-lg bg-white dark:bg-gray-600 hover:bg-pink-100 dark:hover:bg-gray-500 transition-all duration-300 text-pink-600 dark:text-pink-300 font-semibold shadow-sm border border-pink-200 dark:border-gray-500 hover:scale-105">8</button>
+                    <button onclick="addNumber(9)" class="p-4 rounded-lg bg-white dark:bg-gray-600 hover:bg-pink-100 dark:hover:bg-gray-500 transition-all duration-300 text-pink-600 dark:text-pink-300 font-semibold shadow-sm border border-pink-200 dark:border-gray-500 hover:scale-105">9</button>
+            
+                    <div class="col-span-1 flex justify-center items-center">
+                        <button onclick="clearPassword()" class="p-4 w-full rounded-lg bg-red-400 hover:bg-red-500 transition-all duration-300 text-white shadow-sm animate__animated animate__rubberBand">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2M3 12l6.414 6.414a2 2 0 001.414.586H19a2 2 0 002-2V7a2 2 0 00-2-2h-8.172a2 2 0 00-1.414.586L3 12z" />
+                            </svg>
+                        </button>
+                    </div>
+            
+                    <button onclick="addNumber(0)" class="p-4 rounded-lg bg-white dark:bg-gray-600 hover:bg-pink-100 dark:hover:bg-gray-500 transition-all duration-300 text-pink-600 dark:text-pink-300 font-semibold shadow-sm border border-pink-200 dark:border-gray-500 hover:scale-105">0</button>
+            
+                    <div class="col-span-1 flex justify-center items-center">
+                        <button onclick="checkPassword()" class="p-4 w-full rounded-lg bg-pink-500 dark:bg-pink-600 hover:bg-pink-600 dark:hover:bg-pink-700 transition-all duration-300 text-white shadow-sm animate__animated animate__heartBeat">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+
+    <!-- Modal de Éxito -->
+    <div id="successModal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 animate__animated animate__fadeIn">
+        <div class="bg-gradient-to-br from-white dark:from-gray-800 to-pink-50 dark:to-gray-700 rounded-3xl max-w-md w-full p-10 text-center relative shadow-2xl animate__animated animate__bounceIn border border-pink-100 dark:border-gray-600">
+            <div class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 cursor-pointer transition-colors duration-300" onclick="closeModal('successModal')">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </div>
+            <div class="bg-pink-100 dark:bg-pink-700 w-24 h-24 rounded-full mx-auto mb-8 flex items-center justify-center animate__animated animate__tada">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-pink-500 dark:text-pink-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </div>
+            <h2 class="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-4">¡Bienvenida Amor! ❤️</h2>
+            <p class="text-gray-600 dark:text-gray-300 text-lg mb-8">Tu entrada ha sido confirmada con éxito</p>
+            <button onclick="closeModal('successModal')" class="w-full bg-gradient-to-r from-pink-400 dark:from-pink-600 to-pink-600 dark:to-pink-700 text-white py-4 rounded-xl hover:from-pink-500 dark:hover:from-pink-500 hover:to-pink-700 dark:hover:to-pink-800 transition-all duration-300 text-lg font-semibold shadow-lg hover:shadow-xl animate__animated animate__pulse">
+                Continuar
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal de Error -->
+    <div id="errorModal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 animate__animated animate__fadeIn">
+        <div class="bg-gradient-to-br from-white dark:from-gray-800 to-red-50 dark:to-gray-700 rounded-3xl max-w-md w-full p-10 text-center relative shadow-2xl animate__animated animate__shake border border-red-100 dark:border-red-600">
+            <div class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 cursor-pointer transition-colors duration-300" onclick="closeModal('errorModal')">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </div>
+            <div class="bg-red-100 dark:bg-red-700 w-24 h-24 rounded-full mx-auto mb-8 flex items-center justify-center animate__animated animate__headShake">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-red-500 dark:text-red-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </div>
+            <h2 class="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-4">Código Incorrecto 💔</h2>
+            <p class="text-gray-600 dark:text-gray-300 text-lg mb-8">El código de acceso no es válido</p>
+            <button onclick="closeModal('errorModal')" class="w-full bg-gradient-to-r from-red-400 dark:from-red-600 to-red-600 dark:to-red-700 text-white py-4 rounded-xl hover:from-red-500 dark:hover:from-red-500 hover:to-red-700 dark:hover:to-red-800 transition-all duration-300 text-lg font-semibold shadow-lg hover:shadow-xl animate__animated animate__wobble">
+                Intentar de nuevo
+            </button>
+        </div>
+    </div>
+
+    <div class="fixed top-6 right-6 z-50 animate__animated animate__fadeInRight">
+        <div class="bg-gradient-to-r from-pink-50 dark:from-gray-700 to-white dark:to-gray-800 rounded-2xl shadow-xl p-4 flex items-center gap-3 max-w-xs border border-pink-200 dark:border-gray-600 hover:shadow-2xl transition-all duration-300 hover:scale-105">
+            <!-- Imagen de Hello Kitty -->
+            <div class="w-12 h-12 flex-shrink-0 rounded-full overflow-hidden bg-pink-100 dark:bg-pink-800 p-1 border-2 border-pink-200 dark:border-gray-500 shadow-inner">
+                <img 
+                    src="public/image-removebg-preview (1).png" 
+                    alt="Hello Kitty" 
+                    class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-300"
+                >
+            </div>
+            
+            <!-- Contenido -->
+            <div class="flex-grow pr-2">
+                <div class="flex items-center gap-1">
+                    <span class="text-pink-600 dark:text-pink-300 font-bold text-sm tracking-wide">Hello Kitty</span>
+                    <span class="text-pink-400 dark:text-pink-200 text-lg">•</span>
+                </div>
+                <p class="text-gray-600 dark:text-gray-300 text-xs leading-relaxed mt-0.5">
+                    Ingresa el código en el tablero de números ❤️
+                </p>
+            </div>
+
+            <!-- Botón para cerrar (opcional) -->
+            <button 
+                onclick="this.parentElement.parentElement.remove()" 
+                class="opacity-0 hover:opacity-100 absolute -top-2 -right-2 bg-white dark:bg-gray-700 rounded-full p-1 shadow-md border border-pink-200 dark:border-gray-500 text-pink-400 dark:text-pink-200 hover:text-pink-600 dark:hover:text-pink-300 transition-all duration-300"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <style>
+        body { font-family: 'Raleway', sans-serif; }
+    </style>
+
+    <script src="src/js/index.js"></script>
+
+
+</body>
+</html>

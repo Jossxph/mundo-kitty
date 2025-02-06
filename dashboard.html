@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - MUNDO KITTY</title>
+    <meta name="description" content="Mundo Kitty para mi novia.">
+    <link rel="icon" href="public/cabehello2.png" type="image/png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#ff69b4',
+                        secondary: '#ff1493',
+                        dark: '#1a1a2e',
+                        'dark-light': '#2d2d44'
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(-10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        heartBeat: {
+                            '0%': { transform: 'scale(1)' },
+                            '50%': { transform: 'scale(1.1)' },
+                            '100%': { transform: 'scale(1)' }
+                        },
+                        slideIn: {
+                            '0%': { transform: 'translateX(-100%)' },
+                            '100%': { transform: 'translateX(0)' }
+                        }
+                    },
+                    animation: {
+                        fadeIn: 'fadeIn 0.5s ease-out',
+                        heartBeat: 'heartBeat 1s infinite',
+                        slideIn: 'slideIn 0.3s ease-out'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .modal {
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Sidebar móvil */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease-in-out;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+        }
+
+        /* Ocultar scrollbar pero mantener funcionalidad */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+
+<body class="bg-dark text-white min-h-screen">
+    <!-- Overlay para sidebar móvil -->
+    <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden lg:hidden"></div>
+
+    <!-- Header -->
+    <header class="bg-dark-light p-4 flex justify-between items-center shadow-lg fixed w-full top-0 z-50">
+        <!-- Botón menú móvil -->
+        <button id="mobile-menu-btn" class="lg:hidden text-2xl mr-4">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <div class="text-2xl font-bold text-primary flex items-center gap-2">
+            <i class="fas fa-heart animate-heartBeat"></i>
+            <span class="hidden sm:inline">Dashboard Kitty</span>
+        </div>
+
+        <div class="flex items-center space-x-3 sm:space-x-6">
+            <!-- Email -->
+            <button id="email-btn" class="relative hover:text-primary transition-colors">
+                <i class="fas fa-envelope text-xl"></i>
+                <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1.5">0</span>
+            </button>
+            <!-- Notificaciones -->
+            <button id="notifications-btn" class="relative hover:text-primary transition-colors">
+                <i class="fas fa-bell text-xl"></i>
+                <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1.5">1</span>
+            </button>
+
+            <!-- Usuario -->
+            <div class="relative">
+                <button id="user-btn" class="flex items-center hover:text-primary transition-colors">
+                    <!-- Contenedor de imagen con tamaño fijo -->
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0 relative">
+                        <img src="public/anto.png" alt="Antonella"
+                            class="w-full h-full rounded-full object-cover border-2 border-primary">
+                    </div>
+                    <!-- Información de usuario con espaciado responsive -->
+                    <div class="hidden sm:flex items-center ml-3">
+                        <span class="font-medium text-sm sm:text-base">Antoanet</span>
+                        <i class="fas fa-chevron-down text-xs sm:text-sm ml-2"></i>
+                    </div>
+                </button>
+
+                <!-- Menú desplegable mejorado -->
+                <div id="user-menu"
+                    class="absolute right-0 mt-2 w-48 sm:w-56 bg-dark-light rounded-lg shadow-lg hidden animate-fadeIn z-50">
+                    <!-- Header del menú con foto -->
+                    <div class="p-4 border-b border-gray-700">
+                        <div class="flex items-center space-x-3">
+                            <img src="public/anto.png" alt="Antonella"
+                                class="w-10 h-10 rounded-full object-cover border-2 border-primary">
+                            <div>
+                                <p class="text-sm text-gray-400">Conectado como</p>
+                                <p class="font-medium text-white">Anto Mi Amor</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Opciones del menú -->
+                    <div class="py-1">
+                        <a href="#"
+                            class="flex items-center px-4 py-3 hover:bg-primary hover:text-white transition-colors">
+                            <i class="fas fa-user text-lg w-6"></i>
+                            <span class="ml-2">Perfil</span>
+                        </a>
+                        <a href="#"
+                            class="flex items-center px-4 py-3 hover:bg-primary hover:text-white transition-colors">
+                            <i class="fas fa-cog text-lg w-6"></i>
+                            <span class="ml-2">Configuración</span>
+                        </a>
+                        <a href="index.html"
+                            class="flex items-center px-4 py-3 hover:bg-primary hover:text-white transition-colors">
+                            <i class="fas fa-sign-out-alt text-lg w-6"></i>
+                            <span class="ml-2">Cerrar Sesión</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sidebar -->
+    <aside id="sidebar"
+        class="sidebar fixed left-0 top-0 h-full w-64 bg-dark-light pt-20 shadow-lg z-40 lg:translate-x-0">
+        <nav class="p-4">
+            <ul class="space-y-2">
+                <li>
+                    <a href="dashboard.html"
+                        class="flex items-center space-x-3 p-3 rounded-lg hover:bg-primary transition-colors">
+                        <i class="fas fa-home"></i>
+                        <span>Inicio</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-primary transition-colors">
+                        <i class="fas fa-images"></i>
+                        <span>Galería</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-primary transition-colors">
+                        <i class="fas fa-calendar-days"></i>
+                        <span>Calendario</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-primary transition-colors">
+                        <i class="fas fa-music"></i>
+                        <span>Nuestra Música</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-primary transition-colors">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <span>Lugares Especiales</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-primary transition-colors">
+                        <i class="fas fa-gift"></i>
+                        <span>Regalos</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="lg:ml-64 pt-20 p-4 sm:p-6">
+        <!-- Welcome Section -->
+
+        <style>
+            .gradient-bg {
+                background: linear-gradient(-45deg, #e29aff, #fac4fa, #fbc2eb, #a18cd1);
+                background-size: 400% 400%;
+                animation: gradientShift 15s ease infinite;
+            }
+
+            @keyframes gradientShift {
+                0% {
+                    background-position: 0% 50%;
+                }
+
+                50% {
+                    background-position: 100% 50%;
+                }
+
+                100% {
+                    background-position: 0% 50%;
+                }
+            }
+
+            .floating-heart {
+                position: absolute;
+                font-size: 2rem;
+                opacity: 1;
+                pointer-events: none;
+                animation: floatUp 2s ease-out forwards;
+            }
+
+            .sparkle {
+                position: absolute;
+                width: 4px;
+                height: 4px;
+                background-color: white;
+                border-radius: 50%;
+                pointer-events: none;
+                animation: sparkle 1.5s ease-out forwards;
+            }
+
+            @keyframes floatUp {
+                0% {
+                    transform: translateY(0) scale(1) rotate(0deg);
+                    opacity: 1;
+                }
+
+                100% {
+                    transform: translateY(-100px) scale(1.5) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+
+            @keyframes sparkle {
+                0% {
+                    transform: scale(0) rotate(0deg);
+                    opacity: 1;
+                }
+
+                100% {
+                    transform: scale(2) rotate(180deg);
+                    opacity: 0;
+                }
+            }
+
+            .parallax-text {
+                transform: translateZ(0);
+                transition: transform 0.3s ease-out;
+            }
+
+            .message-bubble {
+                opacity: 0;
+                transform: translateY(20px);
+                transition: all 0.5s ease;
+            }
+
+            .message-bubble.show {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .message-bubble.hide {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            .hover-tilt {
+                transition: transform 0.3s ease-out;
+            }
+
+            .hover-tilt:hover {
+                transform: perspective(1000px) rotateX(10deg) rotateY(10deg);
+            }
+        </style>
+
+        <div id="heartContainer" class="fixed inset-0 pointer-events-none z-50"></div>
+
+        <main class="container mx-auto px-4 py-8">
+            <section class="relative overflow-hidden rounded-3xl p-8 sm:p-16 mb-8 gradient-bg shadow-2xl">
+                <div class="absolute inset-0 bg-black opacity-10"></div>
+
+                <div class="relative max-w-3xl mx-auto text-center">
+                    <h1
+                        class="text-4xl sm:text-6xl font-extrabold mb-6 text-white drop-shadow-2xl animate__animated animate__fadeInDown parallax-text">
+                        ¡Bienvenida, Antonella! 💖
+                    </h1>
+
+                    <p class="text-lg sm:text-2xl text-white opacity-95 mb-8 animate__animated animate__fadeInUp">
+                        Cada latido de mi corazón te celebra. Este espacio es solo para ti, mi princesa.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                        <button id="loveButton"
+                            class="relative bg-white text-pink-600 px-8 py-4 rounded-full font-bold shadow-2xl hover:bg-opacity-90 transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 animate__animated animate__pulse hover-tilt">
+                            Explorar Nuestro Mundo ✨
+                        </button>
+
+                        <button id="messageButton"
+                            class="relative bg-pink-500 text-white px-8 py-4 rounded-full font-bold shadow-2xl hover:bg-pink-600 transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 animate__animated animate__pulse hover-tilt">
+                            Mensaje Especial 💌
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <div id="messages" class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                <!-- Los mensajes se agregarán aquí dinámicamente -->
+            </div>
+        </main>
+
+
+        <!-- Grid de Widgets -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+
+            <style>
+                .countdown-container {
+                    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+                    transition: transform 0.3s ease, box-shadow 0.3s ease;
+                }
+
+                .countdown-container:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+                }
+
+                .number-box {
+                    background: rgba(255, 255, 255, 0.1);
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    backdrop-filter: blur(5px);
+                    transition: all 0.3s ease;
+                }
+
+                .number-box:hover {
+                    background: rgba(255, 255, 255, 0.15);
+                    transform: scale(1.05);
+                }
+
+                @keyframes pulse {
+                    0% {
+                        transform: scale(1);
+                    }
+
+                    50% {
+                        transform: scale(1.05);
+                    }
+
+                    100% {
+                        transform: scale(1);
+                    }
+                }
+
+                .heart-icon {
+                    animation: pulse 2s infinite;
+                    color: #ff69b4;
+                }
+
+                .progress-ring {
+                    transform: rotate(-90deg);
+                }
+
+                .progress-ring circle {
+                    transition: stroke-dashoffset 0.3s;
+                }
+
+                .plans-button {
+                    background: linear-gradient(45deg, #ff69b4, #ff4d94);
+                    transition: all 0.3s ease;
+                }
+
+                .plans-button:hover {
+                    background: linear-gradient(45deg, #ff4d94, #ff69b4);
+                    transform: translateY(-2px);
+                    box-shadow: 0 4px 12px rgba(255, 105, 180, 0.3);
+                }
+
+                .floating-hearts {
+                    position: absolute;
+                    animation: float 3s ease-in infinite;
+                    opacity: 0;
+                }
+
+                @keyframes float {
+                    0% {
+                        transform: translateY(0);
+                        opacity: 0;
+                    }
+
+                    50% {
+                        opacity: 0.6;
+                    }
+
+                    100% {
+                        transform: translateY(-100px);
+                        opacity: 0;
+                    }
+                }
+            </style>
+
+            <div
+                class="sm:p-6 card-hover shadow-lg max-w-md mx-auto countdown-container rounded-xl p-6 relative overflow-hidden">
+                <!-- Header -->
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                        Planes a Futuro
+                        <i class="fas fa-heart heart-icon"></i>
+                    </h3>
+                    <div class="text-pink-400">
+                        <i class="fas fa-calendar-alt text-2xl"></i>
+                    </div>
+                </div>
+
+                <!-- Main Countdown Display -->
+                <div class="grid grid-cols-4 gap-4 mb-6">
+                    <div class="number-box rounded-lg p-3 text-center">
+                        <div id="days" class="text-2xl font-bold text-pink-400"></div>
+                        <div class="text-xs text-gray-400">Días</div>
+                    </div>
+                    <div class="number-box rounded-lg p-3 text-center">
+                        <div id="hours" class="text-2xl font-bold text-pink-400"></div>
+                        <div class="text-xs text-gray-400">Horas</div>
+                    </div>
+                    <div class="number-box rounded-lg p-3 text-center">
+                        <div id="minutes" class="text-2xl font-bold text-pink-400"></div>
+                        <div class="text-xs text-gray-400">Minutos</div>
+                    </div>
+                    <div class="number-box rounded-lg p-3 text-center">
+                        <div id="seconds" class="text-2xl font-bold text-pink-400"></div>
+                        <div class="text-xs text-gray-400">Segundos</div>
+                    </div>
+                </div>
+
+                <!-- Progress Circle -->
+                <div class="flex justify-center mb-6">
+                    <svg class="progress-ring" width="120" height="120">
+                        <circle class="progress-ring-circle-bg" stroke="#2a2a3a" stroke-width="8" fill="transparent"
+                            r="52" cx="60" cy="60" />
+                        <circle id="progressCircle" class="progress-ring-circle" stroke="#ff69b4" stroke-width="8"
+                            fill="transparent" r="52" cx="60" cy="60" />
+                    </svg>
+                </div>
+
+                <!-- Message and Button -->
+                <div class="text-center mb-6">
+                    <p class="text-gray-300 mb-2">En 4 años te veo mi princesa.</p>
+                    <p id="countdownText" class="text-lg font-medium text-pink-400"></p>
+                </div>
+
+                <div class="flex justify-center">
+                    <button class="plans-button text-white px-6 py-3 rounded-full font-semibold">
+                        Ver Nuestros Planes 💫
+                    </button>
+                </div>
+            </div>
+
+            <script>
+                // Configuración inicial
+                const targetDate = new Date(Date.UTC(2028, 11, 5, 5, 0, 0));
+                const startDate = new Date(2024, 1, 4); // Fecha de inicio (4 de febrero 2024)
+                const totalDuration = targetDate - startDate;
+
+                // Configurar el círculo de progreso
+                const circle = document.getElementById('progressCircle');
+                const radius = circle.r.baseVal.value;
+                const circumference = radius * 2 * Math.PI;
+                circle.style.strokeDasharray = `${circumference} ${circumference}`;
+                circle.style.strokeDashoffset = circumference;
+
+                function setProgress(percent) {
+                    const offset = circumference - (percent / 100 * circumference);
+                    circle.style.strokeDashoffset = offset;
+                }
+
+                function createFloatingHeart() {
+                    const heart = document.createElement('div');
+                    heart.className = 'floating-hearts';
+                    heart.innerHTML = '💖';
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.fontSize = (Math.random() * 10 + 10) + 'px';
+                    document.querySelector('.countdown-container').appendChild(heart);
+
+                    setTimeout(() => heart.remove(), 3000);
+                }
+
+                function updateCountdown() {
+                    const now = new Date();
+                    const diffMs = targetDate - now;
+
+                    if (diffMs <= 0) {
+                        document.getElementById("days").textContent = "0";
+                        document.getElementById("hours").textContent = "0";
+                        document.getElementById("minutes").textContent = "0";
+                        document.getElementById("seconds").textContent = "0";
+                        document.getElementById("countdownText").textContent = "¡La fecha ha llegado! 💑";
+                        return;
+                    }
+
+                    // Calcular el progreso total
+                    const progress = ((now - startDate) / totalDuration) * 100;
+                    setProgress(progress);
+
+                    // Calcular tiempo restante
+                    const totalSeconds = Math.floor(diffMs / 1000);
+                    const seconds = String(totalSeconds % 60).padStart(2, '0');
+                    const totalMinutes = Math.floor(totalSeconds / 60);
+                    const minutes = String(totalMinutes % 60).padStart(2, '0');
+                    const totalHours = Math.floor(totalMinutes / 60);
+                    const hours = String(totalHours % 24).padStart(2, '0');
+                    const days = String(Math.floor(totalHours / 24)).padStart(2, '0');
+
+                    // Actualizar elementos
+                    document.getElementById("days").textContent = days;
+                    document.getElementById("hours").textContent = hours;
+                    document.getElementById("minutes").textContent = minutes;
+                    document.getElementById("seconds").textContent = seconds;
+                    document.getElementById("countdownText").textContent = `Te espero, Mi amor 💞`;
+
+                    // Crear corazón flotante ocasionalmente
+                    if (Math.random() < 0.1) { // 10% de probabilidad cada segundo
+                        createFloatingHeart();
+                    }
+                }
+
+                // Iniciar contador
+                updateCountdown();
+                setInterval(updateCountdown, 1000);
+
+                // Efecto hover para el botón
+                const button = document.querySelector('.plans-button');
+                button.addEventListener('mouseenter', () => {
+                    createFloatingHeart();
+                    createFloatingHeart();
+                    createFloatingHeart();
+                });
+            </script>
+
+            <!-- [Repite el patrón para los demás widgets...] -->
+        </div>
+    </main>
+
+    <!-- Notifications Modal -->
+    <div id="notifications-modal"
+        class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4 hidden">
+        <div
+            class="bg-slate-900 rounded-2xl max-w-md w-full mx-auto shadow-xl transform transition-all duration-300 ease-in-out">
+            <!-- Header -->
+            <div class="p-6 border-b border-slate-800">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-pink-500" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                        </svg>
+                        <h2 class="text-2xl font-bold text-white">Notificaciones</h2>
+                    </div>
+                    <button id="close-notifications-btn"
+                        class="text-slate-400 hover:text-white transition-colors duration-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Notifications Content -->
+            <div id="notifications-content" class="p-6 space-y-4">
+                <!-- Notifications will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Emails Modal -->
+    <div id="email-modal"
+        class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4 hidden">
+        <div
+            class="bg-slate-900 rounded-2xl max-w-md w-full mx-auto shadow-xl transform transition-all duration-300 ease-in-out">
+            <!-- Header -->
+            <div class="p-6 border-b border-slate-800">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-500" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                        <h2 class="text-2xl font-bold text-white">Correos</h2>
+                    </div>
+                    <button id="close-email-btn" class="text-slate-400 hover:text-white transition-colors duration-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Emails Content -->
+            <div id="emails-content" class="p-6 space-y-4">
+                <!-- Emails will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script src="src/js/dash.js"></script>
+
+
+</body>
+
+</html>
