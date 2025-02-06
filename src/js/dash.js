@@ -285,7 +285,7 @@ addNotification('notificacion', {
     descripcion: "Es hora de hacerlo único.",
     text_button: "Ir ahora",
     texto_cold: "Hace un momento",
-    dirrecion: "/src/modules/san-valentin.html"
+    dirrecion: "../modules/san-valentin.html"
 });
 
 
