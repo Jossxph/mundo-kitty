@@ -280,13 +280,13 @@ document.getElementById('close-email-btn')?.addEventListener('click', () => togg
 
 // Ejemplos de uso (puedes comentar/descomentar para probar)
 // Añadir una notificación de ejemplo
-addNotification('notificacion', {
-    titulo: "Sorpresa especial",
-    descripcion: "Es hora de hacerlo único.",
-    text_button: "Ir ahora",
-    texto_cold: "Hace un momento",
+//addNotification('notificacion', {
+ //   titulo: "Sorpresa especial",
+   // descripcion: "Es hora de hacerlo único.",
+   // text_button: "Ir ahora",
+   // texto_cold: "Hace un momento",
     
-});
+//});
 
 
 // // Añadir un correo de ejemplo
