@@ -286,6 +286,7 @@ addNotification('notificacion', {
     text_button: "Ir ahora",
     texto_cold: "Hace un momento",
     dirrecion: "/san-valentin.html"
+
 });
 
 
