@@ -193,7 +193,7 @@ function renderNotifications(data) {
                     </div>
                     <p class="text-slate-300 text-sm mb-3">${noti.descripcion}</p>
                     ${noti.text_button ? `
-                        <button onclick="window.location.href='${noti.dirrecion}'" 
+                        <button onclick="window.location.href='san-valentin.html'" 
                                 class="bg-pink-600 text-white px-6 py-2 rounded-full hover:bg-pink-700 transition-all duration-300 text-sm font-medium flex items-center gap-2 hover:gap-3">
                             ${noti.text_button}
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -285,8 +285,7 @@ addNotification('notificacion', {
     descripcion: "Es hora de hacerlo único.",
     text_button: "Ir ahora",
     texto_cold: "Hace un momento",
-    dirrecion: "/san-valentin.html"
-
+    
 });
 
 
